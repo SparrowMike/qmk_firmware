@@ -1,9 +1,5 @@
 #include QMK_KEYBOARD_H
 
-#ifdef BONGO_ENABLE
-#include "bongo.h"
-#endif
-
 enum layers {
     _BASE,
     _FIRST,
@@ -240,7 +236,13 @@ bool oled_task_user(){
         // oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
         // oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
     } else {
+#    ifdef BONGO_ENABLE
         draw_bongo(true);
+#    endif
+
+#    ifdef OCEAN_DREAM_ENABLE
+        render_stars();
+#    endif
     }
 
     return false;
@@ -254,6 +256,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(KC_LSFT);
             }
+            break;
+        case KC_LCTL:
+        case KC_RCTL:
+#ifdef OCEAN_DREAM_ENABLE
+            is_calm = (record->event.pressed) ? true : false;
+#endif
             break;
     }
     return true;

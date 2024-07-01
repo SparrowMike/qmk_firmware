@@ -21,4 +21,20 @@
 
 #define TAPPING_TERM 200
 
-#define BONGO_ENABLE
+#ifdef OLED_DRIVER_ENABLE
+#    include "oled_driver.h"
+#    define OLED_RENDER_WPM_COUNTER " WPM: "
+#endif
+
+#ifdef BONGO_ENABLE
+// #    define BONGO_ENABLE
+#    include "./animation/bongo.h"
+#endif
+
+#ifdef LUNA_ENABLE
+#    include "luna.h"
+#endif
+
+#ifdef OCEAN_DREAM_ENABLE
+#    include "./animation/ocean_dream.h"
+#endif
