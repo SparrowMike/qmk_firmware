@@ -49,12 +49,12 @@ enum combo_events {
     ESC_QW,
     COMMA_DOT_ESC,
     M_COMMA_ESC,
+    OP_CAPS,
     CMD_Z,
     CMD_X,
     CMD_C,
     CMD_V,
     ANGLE_BRACKETS_TAB,
-    // M_ANGLE_BK_TAB,
 };
 
 const uint16_t PROGMEM dot_slash_grv_combo[]  = {KC_DOT, KC_SLSH, COMBO_END};
@@ -63,6 +63,7 @@ const uint16_t PROGMEM m_comma_esc_combo[]    = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM esc_qw_combo[]  = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM l_semi_combo[]  = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM m_angle_combo[] = {KC_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM op_caps_combo[] = {KC_O, KC_P, COMBO_END};
 
 const uint16_t PROGMEM cmd_z_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM cmd_x_combo[] = {KC_X, KC_C, COMBO_END};
@@ -70,13 +71,13 @@ const uint16_t PROGMEM cmd_c_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM cmd_v_combo[] = {KC_V, KC_B, COMBO_END};
 
 combo_t key_combos[] = {
-    [ESC_QW] = COMBO(esc_qw_combo, KC_ESC),
+    [ESC_QW]  = COMBO(esc_qw_combo, KC_ESC),
+    [OP_CAPS] = COMBO(op_caps_combo, KC_CAPS),
     [M_COMMA_ESC] = COMBO(m_comma_esc_combo, KC_ESC),
     [ANGLE_BRACKETS_TAB] = COMBO(angle_brackets_combo, KC_TAB),
     // [M_ANGLE_BK_TAB] = COMBO(m_angle_combo, S(KC_TAB)),
     [DOT_SLASH_GRV]  = COMBO(dot_slash_grv_combo, KC_GRV),
     [L_SEMI_QUOTE]   = COMBO_ACTION(l_semi_combo),
-
 
     [CMD_Z] = COMBO_ACTION(cmd_z_combo),
     [CMD_X] = COMBO_ACTION(cmd_x_combo),
