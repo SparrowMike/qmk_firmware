@@ -4,7 +4,7 @@ RGBLIGHT_SUPPORTED = yes    # RGB underglow is supported, but not enabled by def
 
 # SPLIT_KEYBOARD = yes
 
-# VIA_ENABLE = yes
+VIA_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 
 COMBO_ENABLE = yes
