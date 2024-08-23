@@ -2,7 +2,8 @@
 
 #define MASTER_LEFT
 
-#define OLED_TIMEOUT 36000
+#define OLED_TIMEOUT 6000
 
-#define TESTER
+// #define TESTER
 
+#define INCLUDE_OCEAN
