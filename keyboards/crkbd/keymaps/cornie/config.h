@@ -33,6 +33,6 @@
 
 // INFO: graphics ----RIGHT---- pick one only
 // #define INCLUDE_ARASAKA
-#define INCLUDE_CAT
-// #define INCLUDE_OCEAN
+// define INCLUDE_CAT
+#define INCLUDE_OCEAN
 // #define INCLUDE_BARS
