@@ -1,5 +1,15 @@
 #include QMK_KEYBOARD_H
 
+#define HM_A LCTL_T(KC_A)
+#define HM_S LALT_T(KC_S)
+#define HM_D LGUI_T(KC_D)
+#define HM_F LSFT_T(KC_F)
+
+#define HM_J RSFT_T(KC_J)
+#define HM_K RGUI_T(KC_K)
+#define HM_L RALT_T(KC_L)
+#define HM_SCLN RCTL_T(KC_SCLN)
+
 enum {
     TD_RALT_CAPS,
 };
@@ -23,38 +33,60 @@ enum combo_events {
     M_COMMA_ESC,
     OP_CAPS,
     CMD_Z,
-    CMD_X,
     CMD_C,
     CMD_V,
     ANGLE_BRACKETS_TAB,
+    QW,
+    WE,
+    ER,
+    UI,
+    IO,
+    OP,
+    LY_SEC
 };
 
 const uint16_t PROGMEM dot_slash_grv_combo[]  = {KC_DOT, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM angle_brackets_combo[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM m_comma_esc_combo[]    = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM esc_qw_combo[]  = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM l_semi_combo[]  = {KC_L, KC_SCLN, COMBO_END};
+const uint16_t PROGMEM l_semi_combo[]  = {HM_L, HM_SCLN, COMBO_END};
 const uint16_t PROGMEM m_angle_combo[] = {KC_M, KC_COMM, COMBO_END};
-const uint16_t PROGMEM op_caps_combo[] = {KC_O, KC_P, COMBO_END};
 
 const uint16_t PROGMEM cmd_z_combo[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM cmd_x_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM cmd_c_combo[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM cmd_v_combo[] = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM cmd_c_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM cmd_v_combo[] = {KC_C, KC_V, COMBO_END};
+
+const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
+
+const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM op_combo[] = {KC_O, KC_P, COMBO_END};
+
+const uint16_t PROGMEM ly_sec_combo[] = {KC_SPC, KC_BSPC, COMBO_END};
 
 combo_t key_combos[] = {
     [ESC_QW]  = COMBO(esc_qw_combo, KC_ESC),
-    [OP_CAPS] = COMBO(op_caps_combo, KC_CAPS),
     [M_COMMA_ESC] = COMBO(m_comma_esc_combo, KC_ESC),
     [ANGLE_BRACKETS_TAB] = COMBO(angle_brackets_combo, KC_TAB),
     // [M_ANGLE_BK_TAB] = COMBO(m_angle_combo, S(KC_TAB)),
+
     [DOT_SLASH_GRV]  = COMBO(dot_slash_grv_combo, KC_GRV),
     [L_SEMI_QUOTE]   = COMBO_ACTION(l_semi_combo),
 
     [CMD_Z] = COMBO_ACTION(cmd_z_combo),
-    [CMD_X] = COMBO_ACTION(cmd_x_combo),
     [CMD_C] = COMBO_ACTION(cmd_c_combo),
     [CMD_V] = COMBO_ACTION(cmd_v_combo),
+
+    [QW] = COMBO(qw_combo, KC_LBRC),
+    [WE] = COMBO(we_combo, KC_LCBR),
+    [ER] = COMBO(er_combo, KC_LPRN),
+    [UI] = COMBO(ui_combo, KC_RPRN),
+    [IO] = COMBO(io_combo, KC_RCBR),
+    [OP] = COMBO(op_combo, KC_RBRC),
+
+    [LY_SEC] = COMBO(ly_sec_combo, MO(_SECOND))
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -65,15 +97,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 register_code(KC_Z);
             } else {
                 unregister_code(KC_Z);
-                unregister_code(KC_LGUI);
-            }
-            break;
-        case CMD_X:
-            if (pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_X);
-            } else {
-                unregister_code(KC_X);
                 unregister_code(KC_LGUI);
             }
             break;
@@ -109,22 +132,12 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_RALT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RALT, KC_CAPS),
 };
 
-#define HM_A LCTL_T(KC_A)
-#define HM_S LALT_T(KC_S)
-#define HM_D LGUI_T(KC_D)
-#define HM_F LSFT_T(KC_F)
-
-#define HM_J RSFT_T(KC_J)
-#define HM_K RGUI_T(KC_K)
-/* #define HM_L RALT_T(KC_L) */
-/* #define HM_SCLN RCTL_T(KC_SCLN) */
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_split_3x5_3(
         //,--------------------------------------------.                    ,--------------------------------------------.
         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                           KC_Y,    KC_U,    KC_I,    KC_O,     KC_P,
         //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        HM_A,    HM_S,    HM_D,    HM_F,    KC_G,                           KC_H,    HM_J,    HM_K,    KC_L,   KC_SCLN,
+        HM_A,    HM_S,    HM_D,    HM_F,    KC_G,                           KC_H,    HM_J,    HM_K,    HM_L,   HM_SCLN,
         //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                           KC_N,    KC_M,  KC_COMM,  KC_DOT,  KC_SLSH,
         //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
