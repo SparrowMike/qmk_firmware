@@ -42,7 +42,11 @@ enum combo_events {
     UI,
     IO,
     OP,
-    LY_SEC
+    LY_SEC,
+    RF,
+    UJ,
+    IK,
+    OL
 };
 
 const uint16_t PROGMEM dot_slash_grv_combo[]  = {KC_DOT, KC_SLSH, COMBO_END};
@@ -65,12 +69,15 @@ const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
 const uint16_t PROGMEM op_combo[] = {KC_O, KC_P, COMBO_END};
 
 const uint16_t PROGMEM ly_sec_combo[] = {KC_SPC, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM rf_combo[] = {KC_R, HM_F, COMBO_END};
+const uint16_t PROGMEM uj_combo[] = {KC_U, HM_J, COMBO_END};
+const uint16_t PROGMEM ik_combo[] = {KC_I, HM_K, COMBO_END};
+const uint16_t PROGMEM ol_combo[] = {KC_O, HM_L, COMBO_END};
 
 combo_t key_combos[] = {
     [ESC_QW]  = COMBO(esc_qw_combo, KC_ESC),
     [M_COMMA_ESC] = COMBO(m_comma_esc_combo, KC_ESC),
     [ANGLE_BRACKETS_TAB] = COMBO(angle_brackets_combo, KC_TAB),
-    // [M_ANGLE_BK_TAB] = COMBO(m_angle_combo, S(KC_TAB)),
 
     [DOT_SLASH_GRV]  = COMBO(dot_slash_grv_combo, KC_GRV),
     [L_SEMI_QUOTE]   = COMBO_ACTION(l_semi_combo),
@@ -86,7 +93,11 @@ combo_t key_combos[] = {
     [IO] = COMBO(io_combo, KC_RCBR),
     [OP] = COMBO(op_combo, KC_RBRC),
 
-    [LY_SEC] = COMBO(ly_sec_combo, MO(_SECOND))
+    [LY_SEC] = COMBO(ly_sec_combo, MO(_SECOND)),
+    [RF] = COMBO(rf_combo, KC_UNDS),
+    [UJ] = COMBO(uj_combo, KC_MINS),
+    [IK] = COMBO(ik_combo, KC_PLUS),
+    [OL] = COMBO(ol_combo, KC_EQL)
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -129,7 +140,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_RALT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RALT, KC_CAPS),
+    [TD_RALT_CAPS] = ACTION_TAP_DANCE_DOUBLE(HM_K, KC_CAPS),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -141,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                           KC_N,    KC_M,  KC_COMM,  KC_DOT,  KC_SLSH,
         //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                   MO(_SECOND),MO(_FIRST),KC_ENT,   KC_SPC, KC_BSPC, MO(_SECOND)
+                                   MO(_SECOND),MO(_FIRST),KC_ENT,   KC_SPC, LT(_SECL, KC_BSPC), MO(_SECOND)
                                    //`--------------------------'  `--------------------------'
 
     ),

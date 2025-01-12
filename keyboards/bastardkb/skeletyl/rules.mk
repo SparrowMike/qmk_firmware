@@ -8,3 +8,5 @@ TAP_DANCE_ENABLE = yes
 COMBO_ENABLE = yes
 
 SERIAL_DRIVER = vendor
+
+CAPS_WORD_ENABLE = yes
